@@ -1,6 +1,16 @@
 import { Prisma } from '@prisma/client';
-import { prisma } from '@/config';
+import prisma from '../config/database'
 
-async function createUser(email: string, password: string, userType: string){
- 
+async function create(email: string, password: string, userType: string){
+    return await prisma.user.create({
+        data:{
+            email, password, userType
+        }
+    })
 }
+
+const userRepository ={
+    create
+}
+
+export default userRepository

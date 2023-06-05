@@ -1,1 +1,1 @@
-export * from '/signUp-controller';
+export * from './sign-up-controller/sign-up-controller';
