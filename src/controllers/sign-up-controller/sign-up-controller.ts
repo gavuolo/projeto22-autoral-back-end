@@ -1,16 +1,25 @@
-import userRepository from '@/repositories/user-repository';
-import { Request, Response } from 'express';
-import httpStatus from 'http-status';
+import { createUser } from "@/services/sign-up-services";
+import { NextFunction, Request, Response } from "express";
+import httpStatus from "http-status";
 
-export async function userPost(req: Request, res: Response){
-    const {email, password, userType} = req.body
-    try{ 
-        const user = await userRepository.create(email, password, userType)
-        return res.status(httpStatus.CREATED).send({
-            id: user.id,
-            email: user.email
-        })
-    }catch(err){
-        return res.send(err.message)
+export async function userPost(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
+  const { email, password, userType, confirmPassword } = req.body;
+  try {
+    const user = await createUser({
+      email,
+      password,
+      userType,
+      confirmPassword,
+    });
+    return res.status(httpStatus.CREATED).send(user);
+  } catch (error) {
+    if (error.name === 'DuplicatedEmailError' || error.name === "differentPasswordError") {
+      return res.status(httpStatus.CONFLICT).send(error);
     }
+    next(error)
+  }
 }
