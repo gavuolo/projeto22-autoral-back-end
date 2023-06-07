@@ -17,10 +17,17 @@ async function findEmail(email: string) {
     },
   });
 }
-
+async function createSession(token: string, userId: number){
+  return prisma.session.create({
+    data: {
+      token, userId
+    }
+  })
+}
 const userRepository = {
   create,
   findEmail,
+  createSession,
 };
 
 export default userRepository;
