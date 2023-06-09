@@ -1,4 +1,4 @@
-import { Prisma } from "@prisma/client";
+import { Prisma, User } from "@prisma/client";
 import prisma from "../config/database";
 
 async function create(email: string, hashedPassword: string, userType: string) {
@@ -24,10 +24,26 @@ async function createSession(token: string, userId: number){
     }
   })
 }
+async function findUserById(userId: number){
+  return prisma.user.findFirst({
+    where:{
+      id: userId,
+    }
+  })
+}
+async function deleteSession(token: string){
+  return prisma.session.deleteMany({
+    where:{
+      token: token,
+    }
+  })
+}
 const userRepository = {
   create,
   findEmail,
   createSession,
+  findUserById,
+  deleteSession,
 };
 
 export default userRepository;
