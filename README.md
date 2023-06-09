@@ -5,13 +5,16 @@ Inicialmente a plataforma poderá registrar pacientes; adicionar prontuário; re
 
 Futuramente a aplicação poderá evoluir aplicando novas funcionalidades, como um sistema de agendamento de consultas (seja pela recepção ou pelo próprio paciente), pagamentos, histórico de exames, etc.
 
-1. Rodar o projeto
-
+1. Criar DB dev
+```bash
+npm run dev:migrate
+```
+2. Criar DB test
+```bash
+npm run test:migrate
+```
+3. Rodar o projeto
 ```bash
 npm run dev
 ```
 
-2. Criar DB
-```bash
-npm run dev:migrate
-```

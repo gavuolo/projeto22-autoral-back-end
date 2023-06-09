@@ -9,7 +9,6 @@ export async function signIn(req: AuthenticateToken, res: Response, next: NextFu
 
   try{
     const login = await signInServices.sessionPost(email, password)
-
     return res.status(httpStatus.OK).send(login)
   }catch(error){
     return res.status(httpStatus.UNAUTHORIZED).send(error.message)

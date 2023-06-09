@@ -14,9 +14,7 @@ function validate(schema: ObjectSchema, type: "body" | "params") {
     });
 
     if (error) {
-        res
-        .status(httpStatus.BAD_REQUEST)
-        .send(conflictError(error.message));
+      return res.status(httpStatus.BAD_REQUEST).send(conflictError(error.message));
     } 
     next();
   };
