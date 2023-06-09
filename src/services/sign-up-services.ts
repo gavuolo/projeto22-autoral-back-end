@@ -17,7 +17,6 @@ export async function createUser({
 
   const hashedPassword = await bcrypt.hash(password, 12);
   const user = await userRepository.create(email, hashedPassword, userType);
-  console.log(user);
   return user;
 }
 
