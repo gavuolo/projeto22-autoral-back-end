@@ -2,7 +2,7 @@ import { Router } from 'express';
 // import { authenticateToken } from '@/middlewares'
 import { validateBody } from '@/middlewares/validation-middleware';
 import { loginSchema } from '@/schemas/sign-in-schema';
-import { logOut, signIn } from '@/controllers';
+import { signIn } from '@/controllers';
 
 const loginRouter = Router();
 

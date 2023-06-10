@@ -1,7 +1,7 @@
 import { Router } from 'express';
 // import { authenticateToken } from '@/middlewares'
-import { logOut } from '@/controllers';
 import { authenticateToken } from '@/middlewares/authentication-middleware';
+import { logOut } from '@/controllers/log-out-controller/log-out-controller';
 
 const logOutRouter = Router();
 logOutRouter.all('*', authenticateToken)
