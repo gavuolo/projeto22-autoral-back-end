@@ -42,7 +42,7 @@ model UserStaff {
   gender              String
   cpf                 String         @unique @db.VarChar(11)
   phone               String         @unique @db.VarChar(11)
-  birthday            DateTime
+  birthday            DateTime       
   profession          String
   council             String
   councilRegistration Int            @unique
@@ -51,7 +51,7 @@ model UserStaff {
   createdAt           DateTime       @default(now())
   userId              Int
   User                User           @relation(fields: [userId], references: [id])
-  specialityId        Int
+  specialityId        Int           
   Speciality          Speciality     @relation(fields: [specialityId], references: [id])
   Consultation        Consultation[]
 }

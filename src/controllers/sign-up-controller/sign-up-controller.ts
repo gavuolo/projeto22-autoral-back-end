@@ -1,4 +1,5 @@
 import { createUser } from "@/services/sign-up-services";
+import { User } from "@prisma/client";
 import { NextFunction, Request, Response } from "express";
 import httpStatus from "http-status";
 
@@ -15,7 +16,11 @@ export async function userPost(
       userType,
       confirmPassword,
     });
-    return res.status(httpStatus.CREATED).send(user);
+    return res.status(httpStatus.CREATED).send({
+      id: user.id,
+      userType: user.createdAt,
+      email: user.email
+    });
   } catch (error) {
     if (error.name === 'DuplicatedEmailError' || error.name === "differentPasswordError") {
       return res.status(httpStatus.CONFLICT).send(error);

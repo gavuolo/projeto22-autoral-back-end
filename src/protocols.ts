@@ -27,3 +27,23 @@ export type SignInType = {
   userType: string;
   token: string;
 };
+
+export type UserStaffType ={
+  specialityId?: number;
+  userId: number;
+  councilState: string;
+  councilRegistration: number;
+  council: string;
+  profession: string;
+  birthday: Date;
+  phone: string;
+  cpf: string;
+  gender: string;
+  socialName?: string;
+  name: string;
+}
+
+
+
+  
+          

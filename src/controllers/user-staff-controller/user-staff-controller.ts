@@ -1,17 +1,48 @@
-import { UserStaff } from "@prisma/client";
+import { Speciality, UserStaff } from "@prisma/client";
 import { NextFunction, Request, Response } from "express";
 import { AuthenticateToken } from "@/middlewares/authentication-middleware";
+import { specialityCreate, updateRegister, userStaffRegister } from "@/services/user-staff-services";
+import { UserStaffType } from "@/protocols";
+import httpStatus from "http-status";
+
 export async function userStaffCreate(
   req: AuthenticateToken,
   res: Response,
   next: NextFunction
 ) {
-  const staffForm = req.body as UserStaff;
-  console.log(staffForm)
+  const staffForm = req.body;
+  const { userId } = req;
   try {
-    return res.send(staffForm)
+    const response = await userStaffRegister(userId, staffForm)
+    return res.status(httpStatus.CREATED).send(response);
   } catch (error) {
-    console.log('DKOASPKDPOSA')
-    return res.send(error)
+    console.log('dasdsadasdsa',error);
+    return res.send(error.message);
+  }
+}
+export async function updateUserStaff(req: AuthenticateToken,
+  res: Response,
+  next: NextFunction){
+    const staffForm = req.body;
+    const { userId } = req;
+  try{
+    const response = await updateRegister(userId, staffForm)
+    return res.status(httpStatus.OK).send(response)
+  }catch (error){
+    return console.log(error)
+  }
+}
+export async function speciality(
+  req: AuthenticateToken,
+  res: Response,
+  next: NextFunction
+) {
+  const { name } = req.body;
+  try {
+    const response = await specialityCreate(name);
+    return res.send(response);
+  } catch (error) {
+    console.log(error);
+    return res.send(error);
   }
 }
