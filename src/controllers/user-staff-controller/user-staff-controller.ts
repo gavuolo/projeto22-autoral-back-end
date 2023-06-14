@@ -10,14 +10,16 @@ export async function userStaffCreate(
   res: Response,
   next: NextFunction
 ) {
-  const staffForm = req.body;
+  const staffForm = req.body as UserStaffType;
   const { userId } = req;
   try {
     const response = await userStaffRegister(userId, staffForm)
     return res.status(httpStatus.CREATED).send(response);
   } catch (error) {
-    console.log('dasdsadasdsa',error);
-    return res.send(error.message);
+    if (error.name === 'userAlreadyRegistered'){
+      return res.status(httpStatus.CONFLICT).send(error.message)
+    }
+    next()
   }
 }
 export async function updateUserStaff(req: AuthenticateToken,

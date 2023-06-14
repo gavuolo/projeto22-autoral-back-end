@@ -19,7 +19,19 @@ export const createUserStaffSchema = Joi.object<UserStaff>({
     specialityId: Joi.number(),
     userId: Joi.number()
 })
-
+export const updateUserStaffSchema = Joi.object<UserStaff>({
+    name: Joi.string(),
+    socialName: Joi.string(),
+    phone: Joi.number(),
+    gender: Joi.string(),
+    birthday: date.date().format("DD/MM/YYYY"),
+    profession: Joi.string(),
+    council: Joi.string(),
+    councilRegistration: Joi.number(),
+    councilState: Joi.string(),
+    specialityId: Joi.number(),
+    userId: Joi.number()
+})
 export const createSpecialitySchema = Joi.object({
     name: Joi.string(),
 })

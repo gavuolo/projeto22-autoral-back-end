@@ -5,11 +5,12 @@ import { validateBody } from "@/middlewares";
 import {
   createSpecialitySchema,
   createUserStaffSchema,
+  updateUserStaffSchema,
 } from "@/schemas/user-staff-schema";
 
 const staffRouter = Router();
 staffRouter.all("*", authenticateToken);
 staffRouter.post("/create/speciality", validateBody(createSpecialitySchema), speciality);
 staffRouter.post("/user", validateBody(createUserStaffSchema), userStaffCreate);
-staffRouter.put("/user/update", validateBody(createUserStaffSchema), updateUserStaff)
+staffRouter.put("/user/update", validateBody(updateUserStaffSchema), updateUserStaff)
 export { staffRouter };

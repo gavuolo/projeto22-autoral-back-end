@@ -1,4 +1,5 @@
 import { notFoundError } from "@/errors";
+import { userAlreadyRegistered } from "@/errors/user-already-registered";
 import { UserStaffType } from "@/protocols";
 import userRepository from "@/repositories/user-repository";
 import staffRepository from "@/repositories/user-staff-repository";
@@ -9,12 +10,10 @@ export async function userStaffRegister(
   userId: number,
   staffForm: UserStaffType
 ) {
-  // const registerExist = await staffRepository.findUserStaffById(userId)
-  // if(registerExist){
-  //   const userStaffId = registerExist.id
-  //   const userStaffUpdated = await staffRepository.updateUserStaff(userStaffId, staffForm)
-  //   return userStaffUpdated
-  // }
+  const registerExist = await staffRepository.findUserStaffById(userId)
+  if(registerExist){
+    throw userAlreadyRegistered()
+  }
   const userStaffCreated = await staffRepository.createUserStaff(
     userId,
     staffForm
