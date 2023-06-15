@@ -10,6 +10,7 @@ async function createUserStaff(userId: number, staffForm: UserStaffType) {
   const isoFormattedBirthday = moment(updateFormat, "DD-MM-YYYY").format(
     "YYYY-MM-DDTHH:mm:ss.SSSZ"
   );
+  //refact
   return await prisma.userStaff.create({
     data: {
       ...data,
@@ -45,6 +46,20 @@ async function findSpecialityById(specialityId: number) {
     },
   });
 }
+async function findCpfCreated(cpf: string){
+  return prisma.userStaff.findFirst({
+    where:{
+      cpf
+    }
+  })
+}
+async function findCouncilRegistration(councilRegistration: string){
+  return await prisma.userStaff.findFirst({
+    where:{
+      councilRegistration,
+    }
+  })
+}
 async function findUserStaffById(userId: number) {
   return prisma.userStaff.findFirst({
     where: {
@@ -70,6 +85,8 @@ const staffRepository = {
   findUserStaffById,
   findSpecialityById,
   updateUserStaff,
+  findCpfCreated,
+  findCouncilRegistration,
 };
 
 export default staffRepository;

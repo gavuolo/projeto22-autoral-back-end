@@ -11,7 +11,7 @@ app.use(express.json());
 app.get('/health', (_req, res) => res.send('OK!'))
 app.use('/user', userRouter)
 app.use('/sign-in', loginRouter)
-app.use('/sign-in', logOutRouter)
+app.use('/logout', logOutRouter)
 app.use('/staff', staffRouter)
 app.use(handleApplicationErrors)
 

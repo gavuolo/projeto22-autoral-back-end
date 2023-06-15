@@ -19,7 +19,8 @@ export async function userStaffCreate(
     if (error.name === 'userAlreadyRegistered'){
       return res.status(httpStatus.CONFLICT).send(error.message)
     }
-    next()
+    console.log("01 - TO NO CATCH DO CONTROLLER",error)
+    next(error)
   }
 }
 export async function updateUserStaff(req: AuthenticateToken,

@@ -1,4 +1,6 @@
 import { notFoundError } from "@/errors";
+import { councilRegistrationAlreadyExist } from "@/errors/council-registration-already-exist";
+import { cpfAlreadyExist } from "@/errors/cpf-already-exist";
 import { userAlreadyRegistered } from "@/errors/user-already-registered";
 import { UserStaffType } from "@/protocols";
 import userRepository from "@/repositories/user-repository";
@@ -10,10 +12,12 @@ export async function userStaffRegister(
   userId: number,
   staffForm: UserStaffType
 ) {
-  const registerExist = await staffRepository.findUserStaffById(userId)
-  if(registerExist){
-    throw userAlreadyRegistered()
-  }
+  //verificar se cpf já foi cadastrado
+  await searchCpf(staffForm.cpf)
+  //verificar se conselho no registro foi cadastrado
+  await seatchCouncilRegistration(staffForm.councilRegistration)
+  //verificar se já existe cadastro finalizado com este usuário
+  await findUserStaffById(userId)
   const userStaffCreated = await staffRepository.createUserStaff(
     userId,
     staffForm
@@ -33,7 +37,6 @@ export async function updateRegister(userId: number, staffForm: UserStaffType) {
   }
   throw new Error("ESTE USUÁRIO NÃO TEM REGISTRO");
 }
-
 export async function specialityCreate(name: string): Promise<Speciality> {
   const specialityExist = await searchSpeciality(name);
   if (specialityExist) {
@@ -42,7 +45,24 @@ export async function specialityCreate(name: string): Promise<Speciality> {
   const speciality = await staffRepository.createSpeciality(name);
   return speciality;
 }
-
+async function findUserStaffById(userId:number){
+  const registerExist = await staffRepository.findUserStaffById(userId)
+  if(registerExist){
+    throw userAlreadyRegistered()
+  }
+}
+async function searchCpf(cpf: string){
+  const cpfExist = await staffRepository.findCpfCreated(cpf)
+  if(cpfExist){
+    throw cpfAlreadyExist()
+  }
+}
+async function seatchCouncilRegistration(councilRegistration: string){
+  const councilRegistrationExist = await staffRepository.findCouncilRegistration(councilRegistration)
+  if(councilRegistrationExist){
+    throw councilRegistrationAlreadyExist()
+  }
+}
 async function searchSpeciality(name: string) {
   const speciality = await staffRepository.findSpecialityByName(name);
   if (speciality) {

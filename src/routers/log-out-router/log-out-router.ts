@@ -5,6 +5,6 @@ import { logOut } from '@/controllers';
 
 const logOutRouter = Router();
 logOutRouter.all('*', authenticateToken)
-logOutRouter.delete('/', logOut)
+logOutRouter.delete('', logOut)
 
 export { logOutRouter };

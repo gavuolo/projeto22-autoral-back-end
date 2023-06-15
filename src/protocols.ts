@@ -32,7 +32,7 @@ export type UserStaffType ={
   specialityId?: number;
   userId: number;
   councilState: string;
-  councilRegistration: number;
+  councilRegistration: string;
   council: string;
   profession: string;
   birthday: Date;
