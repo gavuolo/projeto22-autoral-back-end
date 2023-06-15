@@ -13,3 +13,11 @@ export async function createUser(email: string , password: string, userType: str
         }
     });
 }
+export async function createLogin(userId: number, token: string){
+    return await prisma.session.create({
+        data:{
+            userId,
+            token
+        }
+    })
+}
