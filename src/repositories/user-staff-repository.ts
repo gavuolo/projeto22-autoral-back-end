@@ -26,16 +26,12 @@ async function createUserStaff(userId: number, staffForm: UserStaffType) {
 }
 async function updateUserStaff(userStaffId: number, staffForm: UserStaffType) {
   const { birthday, ...data } = staffForm;
-  const isoFormattedBirthday = moment(birthday, "DD-MM-YYYY").format(
-    "YYYY-MM-DDTHH:mm:ss.SSSZ"
-  );
   return await prisma.userStaff.update({
     where: {
       id: userStaffId,
     },
     data: {
-      ...data,
-      birthday: isoFormattedBirthday,
+      ...data
     }
   });
 }

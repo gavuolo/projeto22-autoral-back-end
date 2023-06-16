@@ -11,7 +11,7 @@ import {
 const staffRouter = Router();
 staffRouter.all("*", authenticateToken);
 staffRouter.post("/create/speciality", validateBody(createSpecialitySchema), speciality);
-staffRouter.post("/user", userStaffCreate);
-staffRouter.put("/user/update", validateBody(updateUserStaffSchema), updateUserStaff)
+staffRouter.post("/user", validateBody(createUserStaffSchema), userStaffCreate);
+staffRouter.patch("/user/update", validateBody(updateUserStaffSchema), updateUserStaff)
 export { staffRouter };
 //validateBody(createUserStaffSchema),
