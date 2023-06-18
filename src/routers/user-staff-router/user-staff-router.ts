@@ -13,4 +13,5 @@ staffRouter.all("*", authenticateToken);
 staffRouter.post("/create/speciality", validateBody(createSpecialitySchema), speciality);
 staffRouter.post("/user", validateBody(createUserStaffSchema), userStaffCreate);
 staffRouter.patch("/user/update", validateBody(updateUserStaffSchema), updateUserStaff)
+staffRouter.delete("/delete",)
 export { staffRouter };
