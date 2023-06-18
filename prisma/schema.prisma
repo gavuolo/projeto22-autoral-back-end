@@ -28,7 +28,7 @@ model UserRecepcionist {
   socialName String?
   gender     String
   cpf        String    @unique @db.VarChar(11)
-  phone      String    @unique @db.VarChar(11)
+  phone      String    @db.VarChar(11)
   birthday   DateTime
   updatedAt  DateTime? @updatedAt
   userId     Int

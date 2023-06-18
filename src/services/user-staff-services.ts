@@ -1,4 +1,3 @@
-import { notFoundError } from "@/errors";
 import { councilRegistrationAlreadyExist } from "@/errors/council-registration-already-exist";
 import { cpfAlreadyExist } from "@/errors/cpf-already-exist";
 import { userAlreadyRegistered } from "@/errors/user-already-registered";
@@ -6,7 +5,6 @@ import { UserStaffType } from "@/protocols";
 import userRepository from "@/repositories/user-repository";
 import staffRepository from "@/repositories/user-staff-repository";
 import { Speciality, UserStaff } from "@prisma/client";
-import { format } from "date-fns";
 
 export async function userStaffRegister(
   userId: number,
