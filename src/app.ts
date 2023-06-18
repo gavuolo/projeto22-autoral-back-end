@@ -1,6 +1,6 @@
 import express, { Express } from "express";
 import cors from "cors";
-import { staffRouter, userRouter } from "./routers";
+import { staffRouter, userRouter, recepcionistRouter } from "./routers";
 import { handleApplicationErrors } from "./middlewares";
 import { loginRouter } from "./routers/sign-in-router/sign-in-router";
 import { logOutRouter } from "./routers/log-out-router/log-out-router";
@@ -13,6 +13,7 @@ app.use('/user', userRouter)
 app.use('/sign-in', loginRouter)
 app.use('/logout', logOutRouter)
 app.use('/staff', staffRouter)
+app.use('/user/recepcionist', recepcionistRouter)
 app.use(handleApplicationErrors)
 
 export default app;

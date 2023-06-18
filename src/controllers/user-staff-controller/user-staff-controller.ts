@@ -16,8 +16,8 @@ export async function userStaffCreate(
     const response = await userStaffRegister(userId, staffForm)
     return res.status(httpStatus.CREATED).send(response);
   } catch (error) {
-    if (error.name === 'userAlreadyRegistered'){
-      return res.status(httpStatus.CONFLICT).send(error.message)
+    if (error.name === "ConflictError" || error.name === "cpfAlreadyExist" || error.name === 'userAlreadyRegistered') {
+      return res.status(httpStatus.CONFLICT).send(error.message);
     }
     next(error)
   }
@@ -31,7 +31,7 @@ export async function updateUserStaff(req: AuthenticateToken,
     const response = await updateRegister(userId, staffForm)
     return res.status(httpStatus.OK).send(response)
   }catch (error){
-    return console.log(error)
+    return res.sendStatus(httpStatus.BAD_REQUEST)
   }
 }
 export async function speciality(
@@ -42,9 +42,8 @@ export async function speciality(
   const { name } = req.body;
   try {
     const response = await specialityCreate(name);
-    return res.send(response);
+    return res.status(httpStatus.CREATED).send(response);
   } catch (error) {
-    console.log(error);
-    return res.send(error);
+    return res.sendStatus(httpStatus.BAD_REQUEST)
   }
 }

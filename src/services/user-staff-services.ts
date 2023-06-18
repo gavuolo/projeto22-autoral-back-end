@@ -1,4 +1,4 @@
-import { notFoundError } from "@/errors";
+import { conflictError, notFoundError } from "@/errors";
 import { councilRegistrationAlreadyExist } from "@/errors/council-registration-already-exist";
 import { cpfAlreadyExist } from "@/errors/cpf-already-exist";
 import { userAlreadyRegistered } from "@/errors/user-already-registered";
@@ -12,19 +12,21 @@ export async function userStaffRegister(
   userId: number,
   staffForm: UserStaffType
 ) {
+  //verificar se já existe cadastro finalizado com este usuário
+  await findUserStaffById(userId)
+  //Verificar o userType
+  await compareUserType(userId)
   //verificar se cpf já foi cadastrado
   await searchCpf(staffForm.cpf)
   //verificar se conselho no registro foi cadastrado
   await seatchCouncilRegistration(staffForm.councilRegistration)
-  //verificar se já existe cadastro finalizado com este usuário
-  await findUserStaffById(userId)
+  
   const userStaffCreated = await staffRepository.createUserStaff(
     userId,
     staffForm
   );
   return userStaffCreated;
 }
-
 export async function updateRegister(userId: number, staffForm: UserStaffType) {
   const registerExist = await staffRepository.findUserStaffById(userId);
   if (registerExist) {
@@ -44,6 +46,12 @@ export async function specialityCreate(name: string): Promise<Speciality> {
   }
   const speciality = await staffRepository.createSpeciality(name);
   return speciality;
+}
+async function compareUserType(userId: number){
+  const user = await userRepository.findUserById(userId)
+  if(user.userType === "Recepcionista"){
+      throw conflictError
+  }
 }
 async function findUserStaffById(userId:number){
   const registerExist = await staffRepository.findUserStaffById(userId)

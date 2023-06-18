@@ -43,7 +43,11 @@ export type UserStaffType ={
   name: string;
 }
 
-
-
-  
-          
+export type UserRecepcionistType = {
+  name: string;
+  socialName?: string;
+  gender: string;
+  cpf: string;
+  phone: string;
+  birthday: Date;
+}         
