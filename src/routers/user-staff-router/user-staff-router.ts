@@ -14,4 +14,3 @@ staffRouter.post("/create/speciality", validateBody(createSpecialitySchema), spe
 staffRouter.post("/user", validateBody(createUserStaffSchema), userStaffCreate);
 staffRouter.patch("/user/update", validateBody(updateUserStaffSchema), updateUserStaff)
 export { staffRouter };
-//validateBody(createUserStaffSchema),

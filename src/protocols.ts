@@ -28,7 +28,7 @@ export type SignInType = {
   token: string;
 };
 
-export type UserStaffType ={
+export type UserStaffType = {
   specialityId?: number;
   userId: number;
   councilState: string;

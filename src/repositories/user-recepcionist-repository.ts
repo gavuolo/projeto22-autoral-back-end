@@ -19,6 +19,7 @@ async function createUserRecepcionist(userForms: UserRecepcionistType, userId: n
         } as Prisma.UserRecepcionistCreateInput
     });
 }
+
 async function findCpfCreated(cpf: string) {
     return prisma.userRecepcionist.findFirst({
         where: {

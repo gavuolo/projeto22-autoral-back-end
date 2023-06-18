@@ -15,6 +15,6 @@ next: NextFunction
     const sessionDelete = await logOutServices.logOutService(token, userId);
     return res.sendStatus(httpStatus.NO_CONTENT);
   } catch (error) {
-    return console.log(error.message);
+    return res.sendStatus(httpStatus.BAD_REQUEST)
   }
 }

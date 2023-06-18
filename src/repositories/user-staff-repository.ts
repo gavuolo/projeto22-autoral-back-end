@@ -1,7 +1,6 @@
 import { Prisma, User, UserStaff } from "@prisma/client";
 import prisma from "../config/database";
 import { UserStaffType } from "@/protocols";
-import { format } from "date-fns";
 import moment from "moment";
 
 async function createUserStaff(userId: number, staffForm: UserStaffType) {
