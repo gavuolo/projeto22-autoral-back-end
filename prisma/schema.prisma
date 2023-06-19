@@ -42,16 +42,16 @@ model UserStaff {
   gender              String
   cpf                 String         @unique @db.VarChar(11)
   phone               String         @db.VarChar(11)
-  birthday            DateTime       
+  birthday            DateTime
   profession          String
   council             String
-  councilRegistration String            @unique
+  councilRegistration String         @unique
   councilState        String
   updatedAt           DateTime?      @updatedAt
   createdAt           DateTime       @default(now())
   userId              Int
   User                User           @relation(fields: [userId], references: [id])
-  specialityId        Int           
+  specialityId        Int
   Speciality          Speciality     @relation(fields: [specialityId], references: [id])
   Consultation        Consultation[]
 }
@@ -74,9 +74,9 @@ model Patient {
   id                Int                @id @unique @default(autoincrement())
   name              String
   socialName        String?
-  phone             String             @unique @db.VarChar(11)
+  phone             String             @db.VarChar(11)
   cpf               String             @unique @db.VarChar(11)
-  rg                String?            @unique @db.VarChar(8)
+  rg                String             @unique @db.VarChar(8)
   birthday          DateTime
   maritalStatus     String?
   birthPlace        String
@@ -90,7 +90,9 @@ model Patient {
   updatedAt         DateTime?          @updatedAt
   responsibleId     Int?
   addressId         Int
+  userCreateId       Int
   ResponsiblePerson ResponsiblePerson? @relation(fields: [responsibleId], references: [id])
+  Address           Address            @relation(fields: [addressId], references: [id])
   Consultation      Consultation[]
 }
 
@@ -125,14 +127,16 @@ model ResponsiblePerson {
 }
 
 model Address {
-  id            Int      @id @unique @default(autoincrement())
-  cep           String   @unique @db.VarChar(8)
+  id            Int       @id @unique @default(autoincrement())
+  cep           String    @db.VarChar(8)
   street        String
   city          String
   number        Int
   state         String
   neighborhood  String
   addressDetail String?
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  userCreateId   Int
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  Patient       Patient[]
 }

@@ -18,7 +18,7 @@ export async function userPost(
     });
     return res.status(httpStatus.CREATED).send({
       id: user.id,
-      userType: user.createdAt,
+      userType: user.userType,
       email: user.email
     });
   } catch (error) {

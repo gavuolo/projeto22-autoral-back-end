@@ -1,4 +1,4 @@
-import { Prisma, User, UserStaff } from "@prisma/client";
+import { Prisma } from "@prisma/client";
 import prisma from "../config/database";
 import { UserRecepcionistType } from "@/protocols";
 import moment from "moment";

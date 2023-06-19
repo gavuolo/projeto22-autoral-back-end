@@ -50,4 +50,33 @@ export type UserRecepcionistType = {
   cpf: string;
   phone: string;
   birthday: Date;
-}         
+}
+
+export type MedicalRecordType = {
+  name: string,
+  socialName?: string,
+  phone: string,
+  cpf: string,
+  rg: number,
+  gender: string,
+  birthday: Date,
+  maritalStatus?: string,
+  birthPlace: string,
+  nationality: string,
+  email: string,
+  schooling: string,
+  occupation?: string,
+  observation?: string,
+  responsibleId?: number,
+  addressId: number
+}
+
+export type PatientAddresType ={
+  cep: string;
+  street: string;
+  city: string;
+  number: number;
+  state: string;
+  neighborhood: string;
+  addressDetail?: string;
+}
