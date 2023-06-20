@@ -90,7 +90,7 @@ model Patient {
   updatedAt         DateTime?          @updatedAt
   responsibleId     Int?
   addressId         Int
-  userCreateId       Int
+  userCreateId      Int
   ResponsiblePerson ResponsiblePerson? @relation(fields: [responsibleId], references: [id])
   Address           Address            @relation(fields: [addressId], references: [id])
   Consultation      Consultation[]

@@ -80,3 +80,18 @@ export type PatientAddresType ={
   neighborhood: string;
   addressDetail?: string;
 }
+
+export type ResponsiblePersonType={
+    name: string;
+    socialName?: string;
+    relationship: string;
+    cpf: string;
+    phone: string;
+    rg?: string;
+    birthday: Date;
+    gender: string;
+    email: string;
+    observation?: string;
+    schooling: string;
+    occupation?: string;
+}

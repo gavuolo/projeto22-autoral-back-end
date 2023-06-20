@@ -9,7 +9,7 @@ export const createUserStaffSchema = Joi.object<UserStaff>({
     name: Joi.string().required(),
     socialName: Joi.string(),
     cpf: cpf.document().cpf().required(),
-    phone: Joi.number().required(),
+    phone: Joi.string().min(11).max(11).required(),
     gender: Joi.string().required(),
     birthday: date.date().format("DD/MM/YYYY"),
     profession: Joi.string().required(),
@@ -22,7 +22,7 @@ export const createUserStaffSchema = Joi.object<UserStaff>({
 export const updateUserStaffSchema = Joi.object<UserStaff>({
     name: Joi.string(),
     socialName: Joi.string(),
-    phone: Joi.number(),
+    phone: Joi.string().min(11).max(11),
     gender: Joi.string(),
     birthday: date.date().format("DD/MM/YYYY"),
     profession: Joi.string(),

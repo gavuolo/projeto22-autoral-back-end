@@ -9,5 +9,6 @@ const recepcionistRouter = Router();
 recepcionistRouter.all("*", authenticateToken);
 recepcionistRouter.post("/", validateBody(createUserRecepcionistSchema), recepcionistCreate);
 recepcionistRouter.patch("/update", validateBody(updateUserRecepcionistSchema), recepcionistUpdate);
-recepcionistRouter.delete("/delete")
+// recepcionistRouter.get('/find')
+// recepcionistRouter.delete("/delete")
 export { recepcionistRouter };

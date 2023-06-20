@@ -10,8 +10,9 @@ import {
 
 const staffRouter = Router();
 staffRouter.all("*", authenticateToken);
-staffRouter.post("/create/speciality", validateBody(createSpecialitySchema), speciality);
-staffRouter.post("/user", validateBody(createUserStaffSchema), userStaffCreate);
-staffRouter.patch("/user/update", validateBody(updateUserStaffSchema), updateUserStaff)
-staffRouter.delete("/delete",)
+staffRouter.post("/speciality/create", validateBody(createSpecialitySchema), speciality);
+staffRouter.post("/", validateBody(createUserStaffSchema), userStaffCreate);
+staffRouter.patch("/update", validateBody(updateUserStaffSchema), updateUserStaff)
+// staffRouter.get('/find')
+// staffRouter.delete("/delete",)
 export { staffRouter };
