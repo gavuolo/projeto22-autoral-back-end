@@ -47,7 +47,6 @@ export async function createResponsiblePerson(
 ) {
   const responsibleForm = req.body as ResponsiblePersonType;
   console.log(responsibleForm)
-  console.log('oioioioi')
   const { userId } = req
   try{
     const response = await responsiblePersonPost(responsibleForm, userId)

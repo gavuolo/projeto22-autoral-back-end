@@ -14,6 +14,7 @@ export type ApplicationError = {
 
 export type JWTPayLoad = {
   userId: number;
+  userType: String;
 };
 
 export type LoginBody = {

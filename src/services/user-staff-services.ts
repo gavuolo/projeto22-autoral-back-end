@@ -1,6 +1,7 @@
 import { conflictError, notFoundError } from "@/errors";
 import { councilRegistrationAlreadyExist } from "@/errors/council-registration-already-exist";
 import { cpfAlreadyExist } from "@/errors/cpf-already-exist";
+import { incompleteRegistrationError } from "@/errors/incomplete-registration-error";
 import { userAlreadyRegistered } from "@/errors/user-already-registered";
 import { UserStaffType } from "@/protocols";
 import userRepository from "@/repositories/user-repository";
@@ -45,6 +46,13 @@ export async function specialityCreate(name: string): Promise<Speciality> {
   }
   const speciality = await staffRepository.createSpeciality(name);
   return speciality;
+}
+export async function findUserStaff(userId: number){
+  const response = await staffRepository.findUserStaffById(userId)
+  if(!response){
+    throw incompleteRegistrationError()
+  }
+  return response
 }
 async function compareUserType(userId: number){
   const user = await userRepository.findUserById(userId)

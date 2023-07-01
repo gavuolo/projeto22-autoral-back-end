@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { authenticateToken } from "@/middlewares/authentication-middleware";
-import { speciality, updateUserStaff, userStaffCreate } from "@/controllers";
+import { getUserStaff, speciality, updateUserStaff, userStaffCreate } from "@/controllers";
 import { validateBody } from "@/middlewares";
 import {
   createSpecialitySchema,
@@ -13,6 +13,6 @@ staffRouter.all("*", authenticateToken);
 staffRouter.post("/speciality/create", validateBody(createSpecialitySchema), speciality);
 staffRouter.post("/", validateBody(createUserStaffSchema), userStaffCreate);
 staffRouter.patch("/update", validateBody(updateUserStaffSchema), updateUserStaff)
-// staffRouter.get('/find')
+staffRouter.get("/find", getUserStaff)
 // staffRouter.delete("/delete",)
 export { staffRouter };

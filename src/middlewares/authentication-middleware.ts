@@ -17,8 +17,7 @@ export async function authenticateToken(req: AuthenticateToken, res: Response, n
         return res.status(httpStatus.UNAUTHORIZED).send(unauthorizedError())
     }
     try{
-        const { userId } = jwt.verify(token, process.env.JWT_SECRET) as JWTPayLoad
-
+        const { userId, userType } = jwt.verify(token, process.env.JWT_SECRET) as JWTPayLoad
         const session = await prisma.session.findFirst({
             where:{
                 token,
@@ -27,7 +26,9 @@ export async function authenticateToken(req: AuthenticateToken, res: Response, n
         if (!session){
             return res.status(httpStatus.UNAUTHORIZED).send(unauthorizedError())
         }
+        
         req.userId = userId;
+        req.userType = userType
         return next()
     }catch(error){
         return res.status(httpStatus.UNAUTHORIZED).send(unauthorizedError())

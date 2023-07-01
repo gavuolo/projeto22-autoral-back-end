@@ -19,7 +19,6 @@ async function createUserRecepcionist(userForms: UserRecepcionistType, userId: n
         } as Prisma.UserRecepcionistCreateInput
     });
 }
-
 async function findCpfCreated(cpf: string) {
     return prisma.userRecepcionist.findFirst({
         where: {
@@ -34,10 +33,17 @@ async function findUserRecepcionistById(userId: number) {
         },
     });
 }
-
+async function findUserById(userId: number){
+    return prisma.user.findFirst({
+        where:{
+            id: userId
+        }
+    })
+}
 const recepcionistRepository = {
     findCpfCreated,
     findUserRecepcionistById,
     createUserRecepcionist,
+    findUserById,
 };
 export default recepcionistRepository;
