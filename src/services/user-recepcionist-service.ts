@@ -1,5 +1,6 @@
 import { conflictError } from "@/errors";
 import { cpfAlreadyExist } from "@/errors/cpf-already-exist";
+import { incompleteRegistrationError } from "@/errors/incomplete-registration-error";
 import { userAlreadyRegistered } from "@/errors/user-already-registered";
 import { UserRecepcionistType } from "@/protocols";
 import recepcionistRepository from "@/repositories/user-recepcionist-repository";
@@ -18,6 +19,13 @@ export async function recepcionistPost(userForms: UserRecepcionistType, userId: 
     const response = recepcionistRepository.createUserRecepcionist(userForms, userId)
     return response
 }
+export async function findUserRecepcionist(userId: number){
+    const response = await recepcionistRepository.findUserRecepcionistById(userId)
+    if(!response){
+      throw incompleteRegistrationError()
+    }
+    return response
+  }
 async function searchCpf(cpf: string) {
     const cpfExist = await recepcionistRepository.findCpfCreated(cpf)
     if (cpfExist) {
