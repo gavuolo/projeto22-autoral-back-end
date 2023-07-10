@@ -52,7 +52,7 @@ export async function createResponsiblePerson(
     const response = await responsiblePersonPost(responsibleForm, userId)
     return res.send(response)
   }catch (error){
-    return console.log(error.message)
-    // next(error)
+    console.log(error.message)
+    next(error)
   }
 }

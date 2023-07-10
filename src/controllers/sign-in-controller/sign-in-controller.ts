@@ -19,7 +19,12 @@ export async function getSignIn(req: AuthenticateToken, res: Response, next: Nex
   const { userId } = req
   try{
     const info = await signInServices.getUser(userId)
-    return res.status(httpStatus.OK).send(info)
+    return res.status(httpStatus.OK).send({
+      id: info.id,
+      email: info.email,
+      createdAt: info.createdAt,
+      updatedAt: info.updatedAt
+    })
   }catch(error){
     console.log(error)
     next(error)
