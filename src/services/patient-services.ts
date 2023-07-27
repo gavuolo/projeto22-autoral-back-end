@@ -8,17 +8,13 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
 export async function newMedicalRecord(medicalRecord: Patient, userId: number) {
-   const response = await patientRepository.createPatient(medicalRecord, userId)
-   return response
+   return await patientRepository.createPatient(medicalRecord, userId)
 }
 
 export async function patienteAddressPost(addressForm: PatientAddresType, userId: number){
-   const response = await patientRepository.createAddress(addressForm, userId)
-   return response
+   return await patientRepository.createAddress(addressForm, userId)
 }
 
 export async function responsiblePersonPost(responsibleForm: ResponsiblePersonType, userId: number){
-    const response = await patientRepository.createResponsiblePerson(responsibleForm, userId)
-   console.log("criei ou não criei caralho?", response)
-   return response
+   return await patientRepository.createResponsiblePerson(responsibleForm, userId)
 } 
